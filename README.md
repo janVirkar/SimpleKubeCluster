@@ -1,6 +1,6 @@
 # SimpleKubeCluster
 A simple cluster using minikube for deploying local applications
-For deploying a simeple local cluster for developing/testing applications, start with the following steps
+For deploying a simple local cluster for developing/testing applications on macOS, start with the following steps
 ## Install minikube
 1. brew cask install minikube
 2. brew install kubernetes-cli
@@ -23,3 +23,9 @@ For deploying a simeple local cluster for developing/testing applications, start
 2. curl $(minikube service nginx-deployment --url) (Verify nginx home page is seen)
 3. echo $(minikube service nginx-deployment --url)
 4. <URL-FROM-STEP-3>/hello/ - should return hello world in json format
+  
+ ## Install calico cni
+ 1. curl -O -L https://docs.projectcalico.org/v3.1/getting-started/kubernetes/installation/hosted/kubeadm/1.7/calico.yaml
+ 2. sed -i -e '/nodeSelector/d' calico.yaml
+ 3. sed -i -e '/node-role.kubernetes.io\/master: ""/d' calico.yaml
+ 4. kubectl apply -f calico.yaml
